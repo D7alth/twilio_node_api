@@ -1,11 +1,13 @@
 #Raul canal API
-Serviço de Backend API, com integração com serviço de entrega de mensagens [TWILLIO](https://www.twilio.com/pt-br/docs/).
+Service of Backend API with integration with message delivery service [TWILLIO](https://www.twilio.com/pt-br/docs/).
 
-- Configurações de banco de daodos em [config](config)
-- 
-
-
+- Database config and squeme [config](config)
+- Controllers and contention with TWILLIO API [controllers](controllers)
 
 ## end points
 
-- GET [/json/api](message, to)
+- POST [/json/api/lead/create](leadName, whatsapp, email, leadState;
+- POST [/json/api/lead/update:id](id, leadName, whatsapp, email)
+- GET [/json/api/lead/list]
+- GET [/json/api/lead/list:id](id)
+- POST [/json/api/lead/delete:id](id)
