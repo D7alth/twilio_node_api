@@ -53,3 +53,6 @@ SELECT Leads.leadName, Segmentation.segmentName FROM `Leads`
 INNER JOIN `Segmentation_Leads` ON Leads._id = Segmentation_Leads.lead_id
 INNER JOIN  `Segmentation` on Segmentation_Leads.segmentation_id = Segmentation._id ORDER BY Leads._id;
 
+UPDATE Leads SET leadName = 'alberth henrique', whatsapp = '+556198384', 
+email = 'alberthhls@protonmail.com', leadState = 'RS' 
+WHERE _id = 1;

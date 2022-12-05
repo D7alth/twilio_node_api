@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const testSender = require('./../controllers/testSender');
+const testSender = require('../controllers/testSender');
 
 router.get('/', (req, res) => {
     testSender.sender('message test', '+556183360091');

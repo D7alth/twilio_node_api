@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4444;
 const apiRoute  = require('./routers/api.router.js');
 const leadRoute = require('./routers/lead.router');
 
@@ -17,4 +17,4 @@ app.use(leadRoute);
 
 app.listen(PORT, () => {
     console.log(`API listing in http://localhost:${PORT}`);
-})
+});
