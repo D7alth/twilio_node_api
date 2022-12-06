@@ -12,7 +12,7 @@ Service of Backend API with integration with message delivery service [TWILLIO](
 - POST [/json/api/lead/update:id] {id, leadName, whatsapp, email}
 - GET [/json/api/lead/list]
 - GET [/json/api/lead/list:id] {id}
-- POST [/json/api/lead/delete:id] {id}
+- DELETE [/json/api/lead/delete:id] {id}
 
 ### Segmentation routes
 
@@ -20,4 +20,4 @@ Service of Backend API with integration with message delivery service [TWILLIO](
 - POST [/json/api/lead/update:id] {id, segmentationName}
 - GET [/json/api/lead/list]
 - GET [/json/api/lead/list:id] {id}
-- POST [/json/api/lead/delete:id] {id}
+- DELETE [/json/api/lead/delete:id] {id}
