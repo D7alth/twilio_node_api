@@ -27,7 +27,7 @@ router.post('/json/api/relationship/list/create', (req, res) => {
     resolveCreateRelationship();
 });
 
-router.post('/json/api/relationship/segmentation/create', (req, res) => {
+router.post('/json/api/relationship/segment/create', (req, res) => {
 
     let leadId = req.body.leadId;
     let segmentId = req.body.segmentId;
