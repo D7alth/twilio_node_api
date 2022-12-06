@@ -22,6 +22,14 @@ Service of Backend API with integration with message delivery service [TWILLIO](
 - GET [/json/api/segment/list:id] {id}
 - DELETE [/json/api/segment/delete:id] {id}
 
+### Lists routes
+
+- POST [/json/api/lists/create] {listName}
+- POST [/json/api/lists/update:id] {id, segmentName}
+- GET [/json/api/lists/list]
+- GET [/json/api/lists/list:id] {id}
+- DELETE [/json/api/lists/delete:id] {id}
+
 ### Relationship routes 
 
 - POST [json/api/relationship/list/create] {leadId, listId}

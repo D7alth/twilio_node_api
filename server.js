@@ -6,6 +6,7 @@ const apiRoute  = require('./routers/api.router.js');
 const leadRoute = require('./routers/lead.router');
 const segmentRoute = require('./routers/segmentation.router');
 const relationshipRoute = require('./routers/relationship.router');
+const listRoute = require('./routers/lists.router');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/', apiRoute);
 app.use(leadRoute);
 app.use(segmentRoute);
 app.use(relationshipRoute);
+app.use(listRoute);
 
 app.listen(PORT, () => {
     console.log(`API listing in http://localhost:${PORT}`);

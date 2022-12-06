@@ -59,8 +59,7 @@ INSERT INTO `Lists_Leads` VALUES(1,1);
 SELECT Leads.`leadName`, Lists.list_name FROM `Leads` INNER JOIN `Lists_Leads` ON Leads._id = Lists_Leads.lead_id
 INNER JOIN `Lists` ON Lists_Leads.list_id = Lists._id;
 
-DELETE `Leads` FROM `Leads` INNER JOIN `Segmentation_Leads` ON Leads._id = Segmentation_Leads.lead_id WHERE Leads._id = 1;
-
+SELECT * FROM `Lists`;
 INSERT INTO `Leads` VALUES (DEFAULT, 'andressa caceres', '(23) 9818-9058', 'andycereces@gmail.com', 'RS', DEFAULT, DEFAULT);
 INSERT INTO `Segmentation` VALUES (DEFAULT, 'premiuns', '2022-01-12 23:08:12', '2022-01-12 23:08:12');
 
