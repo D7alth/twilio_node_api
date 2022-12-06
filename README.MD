@@ -1,10 +1,10 @@
-#Raul canal API
+# Raul canal API
 Service of Backend API with integration with message delivery service [TWILLIO](https://www.twilio.com/pt-br/docs/).
 
 - Database config and squeme [config](config)
 - Controllers and contention with TWILLIO API [controllers](controllers)
 
-## end points
+## End points
 
 ### Lead routes
 
