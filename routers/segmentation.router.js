@@ -1,36 +1,27 @@
 const router = require('express').Router();
-const create = require('../models/leads.crud.model/lead.create.db');
-const update = require('../models/leads.crud.model/lead.update.db');
-const listAll = require('../models/leads.crud.model/lead.list.all.db');
-const listBy = require('../models/leads.crud.model/lead.list.by.id.db');
-const deleteLead = require('../models/leads.crud.model/lead.delete.db');
+const create = require('../models/segments.crud.model/segmentation.create.db');
+const update = require('../models/segments.crud.model/segmentation.update.db');
+const listAll = require('../models/segments.crud.model/segmentation.list.all.db');
+const listBy = require('../models/segments.crud.model/segmentation.list.by.id.db');
+const deleteLead = require('../models/segments.crud.model/segmentation.delete.db');
 
-router.post('/json/api/lead/create', (req, res) => {
+router.post('/json/api/segment/create', (req, res) => {
 
-    let leadName = req.body.leadName;
-    let whatsapp = req.body.whatsapp;
-    let email = req.body.email;
-    let leadState = req.body.leadState;
+    let segmentName = req.body.segmentName;
 
-    create.createLead(leadName, whatsapp, email, leadState);
-    res.send(`${leadName}, ${whatsapp}, ${email}, ${leadState}`).status(200);
+    create.createLead(segmentName);
+    res.send(`${segmentName}, created`).status(200);
 });
 
-router.post('/json/api/lead/update:id', (req, res) => {
+router.post('/json/api/segment/update:id', (req, res) => {
     var id = req.params.id;
-    let leadName = req.body.leadName;
-    let whatsapp = req.body.whatsapp;
-    let email = req.body.email;
-    let leadState = req.body.leadState;
+    let segmentationName = req.body.segmentName;
 
-   
-
-    update.updateLead(id, leadName, whatsapp, email, leadState);
-    
-    res.send(`${leadName}, Updated`).status(200);
+    update.updateLead(id, segmentationName);
+    res.send(`${segmentationName}, Updated`).status(200);
 });
 
-router.get('/json/api/lead/list', (req, res) => {
+router.get('/json/api/segment/list', (req, res) => {
     var row;
     var ob;
 
@@ -52,7 +43,7 @@ router.get('/json/api/lead/list', (req, res) => {
 
 });
 
-router.get('/json/api/lead/list:id', (req, res) => {
+router.get('/json/api/segment/list:id', (req, res) => {
     var id = req.params.id;
     var row, ob;
 
@@ -76,7 +67,7 @@ router.get('/json/api/lead/list:id', (req, res) => {
     resolveElementsById();
 });
 
-router.post('/json/api/lead/delete:id', (req, res) => {
+router.post('/json/api/segment/delete:id', (req, res) => {
     var id = req.params.id;   
     id = id.slice(1);
     
