@@ -1,20 +1,17 @@
-const stringConnection = require('../config/db.config');
+const stringConnection = require('../../config/db.config');
 
+exports.createElements = (leadName, whatsapp, email, leadState) => {
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO Leads VALUES (DEFAULT, '${leadName}', '${whatsapp}', '${email}', '${leadState}', DEFAULT, DEFAULT);`;
 
-exports.createLead = (leadName, whatsapp, email, leadState) => stringConnection.connect( err => {
-    const sql = `INSERT INTO Leads VALUES (DEFAULT, '${leadName}', '${whatsapp}', '${email}', '${leadState}', DEFAULT, DEFAULT);`
-    if(err){
-        throw 'error connecting to database ' + err.message;
-    }
-    console.log("Connect");  
-    stringConnection.query(sql, err => {
-        
-        if(err) {
-            throw 'error creating lead ' + err.message; 
-        }else{
-            console.log("Created");
-            return true;
-        } 
-
-    });
-});
+        stringConnection.query(sql, (err, elements) => {
+            if(err){
+                console.log(`Error to create Lead : ${err}`)
+                return reject(err);
+            }
+            console.log("lead created");
+            return resolve(elements);
+            
+        })
+    })
+}

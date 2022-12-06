@@ -9,16 +9,50 @@ router.post('/json/api/segment/create', (req, res) => {
 
     let segmentName = req.body.segmentName;
 
-    create.createLead(segmentName);
-    res.send(`${segmentName}, created`).status(200);
+    async function resolveCreateSegment(){
+        try{
+            create.createElements(segmentName).then(
+                () => {
+                    res.send(`${segmentName}, created`).status(201);
+                }
+            ).catch(e => {
+                console.log(`error to create segmentation, error : ${e.message}`);
+                res.send(`slq error : ${e}`).status(501);
+            });    
+        }
+        catch(err){
+            console.log(`internal server error : ${err}`);
+            res.send(`internal server error`).status(500);
+        }
+    }
+    
+    resolveCreateSegment();
 });
 
 router.post('/json/api/segment/update:id', (req, res) => {
     var id = req.params.id;
     let segmentationName = req.body.segmentName;
 
-    update.updateLead(id, segmentationName);
-    res.send(`${segmentationName}, Updated`).status(200);
+    id = id.slice(1);
+
+    async function resolveUpdateSegment(){
+        try{
+            update.updateElements(id, segmentationName).then(
+                () => {
+                    res.send('Updated').status(200);
+                }
+            ).catch(e => {
+                console.log(e);
+                res.send(`Segmentation not found : ${e}`).status(401);
+            });    
+        }
+        catch(err){
+            console.log(`internal server error : ${err}`);
+            res.send(`internal server error`).status(500);
+        }
+    }
+    
+    resolveUpdateSegment();
 });
 
 router.get('/json/api/segment/list', (req, res) => {
@@ -67,12 +101,28 @@ router.get('/json/api/segment/list:id', (req, res) => {
     resolveElementsById();
 });
 
-router.post('/json/api/segment/delete:id', (req, res) => {
+router.delete('/json/api/segment/delete:id', (req, res) => {
     var id = req.params.id;   
     id = id.slice(1);
     
-    deleteLead.deleteLead(id);
-    res.send(`Lead id :${id}, Deleted`).status(200);
+    async function resolveDelete(){
+        try{
+            deleteLead.deleteElements(id).then(
+                () => {
+                    res.send('Deleted').status(200);
+                }
+            ).catch(e => {
+                console.log(e);
+                res.send('Segment not found').status(401);
+            });    
+        }
+        catch(err){
+            console.log(err);
+            res.status(500);
+        }
+    }
+    
+    resolveDelete();
 });
 
 module.exports = router;

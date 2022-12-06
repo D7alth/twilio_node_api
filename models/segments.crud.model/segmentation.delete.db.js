@@ -1,22 +1,17 @@
-const stringConnection = require('../config/db.config');
+const stringConnection = require('../../config/db.config');
 
-exports.deleteSegmentation = (id) => stringConnection.connect( err => {
-    const sql = `DELETE FROM Leads WHERE _id = ${id};`;
+exports.deleteElements = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM Segmentation WHERE _id = ${id};`;
+        stringConnection.query(sql, (err, elements) => {
+            if(err){
+                console.log(`Error to delete elements ${err}`)
+                return reject(err);
+            }
 
-    if(err){
-        throw 'error connecting to database ' + err.message;
-    }
-    console.log("Connect"); 
-    
-   stringConnection.query(sql, (err, result, fields) => {    
-        if(err){
-            console.log(`Error to delete segmentation ${err}`);
-            return false;
-        }
-        else{
-            console.log("Delete segmentation success"); 
-            console.log(`return : ${result}`);    
-        }
-    }); 
-});
-
+            console.log("Segment deleted");
+            return resolve(elements);
+            
+        })
+    })
+}

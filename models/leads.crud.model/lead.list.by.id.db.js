@@ -1,4 +1,4 @@
-const stringConnection = require('../config/db.config');
+const stringConnection = require('../../config/db.config');
 
 
 exports.getElementsById = (id) =>{

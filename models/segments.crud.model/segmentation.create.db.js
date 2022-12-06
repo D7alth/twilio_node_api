@@ -1,20 +1,17 @@
-const stringConnection = require('../config/db.config');
+const stringConnection = require('../../config/db.config');
 
+exports.createElements = (segmentationName) => {
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO Segmentation VALUES (DEFAULT, '${segmentationName}', DEFAULT, DEFAULT);`
 
-exports.createSegment = (segmentationName) => stringConnection.connect( err => {
-    const sql = `INSERT INTO Segmentation VALUES (DEFAULT, '${segmentationName}', DEFAULT, DEFAULT);`
-    if(err){
-        throw 'error connecting to database ' + err.message;
-    }
-    console.log("Connect");  
-    stringConnection.query(sql, err => {
-        
-        if(err) {
-            throw 'error creating segmentation ' + err.message; 
-        }else{
+        stringConnection.query(sql, (err, elements) => {
+            if(err){
+                console.log(`error creating segmentation : ${err}`)
+                return reject(err);
+            }
             console.log("Created segmentation");
-            return true;
-        } 
-
-    });
-});
+            return resolve(elements);
+            
+        })
+    })
+}

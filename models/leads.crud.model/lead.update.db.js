@@ -1,25 +1,19 @@
-const stringConnection = require('../config/db.config');
+const stringConnection = require('../../config/db.config');
 
-exports.updateLead = (id, leadName, whatsapp, email, leadState) => stringConnection.connect( err => {
-    const sql = `UPDATE Leads SET leadName = '${leadName}', whatsapp = '${whatsapp}', 
-    email = '${email}', leadState = '${leadState}' 
-    WHERE _id = ${id};`;
+exports.updateElements = (id, leadName, whatsapp, email, leadState) => {
+    return new Promise((resolve, reject) => {
+        const sql = `UPDATE Leads SET leadName = '${leadName}', whatsapp = '${whatsapp}', 
+            email = '${email}', leadState = '${leadState}' 
+            WHERE _id = ${id};`;
 
-    if(err){
-        throw 'error connecting to database ' + err.message;
-    }
-    console.log("Connect"); 
-    
-   stringConnection.query(sql, (err, result, fields) => {    
-        if(err){
-            console.log(`Error to update lead ${err}`);
-            return false;
-        }
-        else{
-            console.log("Update lead success"); 
-            console.log(`return : ${result}`);    
-        }
-    }); 
-});
-
-
+        stringConnection.query(sql, (err, elements) => {
+            if(err){
+                console.log(`Error to update elements ${err}`)
+                return reject(err);
+            }
+            console.log("lead updated");
+            return resolve(elements);
+            
+        })
+    })
+}

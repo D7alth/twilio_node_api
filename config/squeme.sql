@@ -56,3 +56,5 @@ INNER JOIN  `Segmentation` on Segmentation_Leads.segmentation_id = Segmentation.
 UPDATE Leads SET leadName = 'alberth henrique', whatsapp = '+556198384', 
 email = 'alberthhls@protonmail.com', leadState = 'RS' 
 WHERE _id = 1;
+
+DELETE FROM Leads WHERE _id = 1;

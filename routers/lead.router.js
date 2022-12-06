@@ -12,9 +12,26 @@ router.post('/json/api/lead/create', (req, res) => {
     let email = req.body.email;
     let leadState = req.body.leadState;
 
-    create.createLead(leadName, whatsapp, email, leadState);
-    res.send(`${leadName}, ${whatsapp}, ${email}, ${leadState}`).status(200);
+    async function resolveCreateLead(){
+        try{
+            create.createElements(leadName, whatsapp, email, leadState).then(
+                () => {
+                    res.send(`${leadName}, ${whatsapp}, ${email}, ${leadState}`).status(200);
+                }
+            ).catch(e => {
+                console.log(`error to create lead, error : ${e.message}`);
+                res.send(`Lead not found : ${e}`).status(401);
+            });    
+        }
+        catch(err){
+            console.log(`internal server error : ${err}`);
+            res.send(`internal server error`).status(500);
+        }
+    }
+    
+    resolveCreateLead();
 });
+
 
 router.post('/json/api/lead/update:id', (req, res) => {
     var id = req.params.id;
@@ -22,12 +39,27 @@ router.post('/json/api/lead/update:id', (req, res) => {
     let whatsapp = req.body.whatsapp;
     let email = req.body.email;
     let leadState = req.body.leadState;
-
-   
-
-    update.updateLead(id, leadName, whatsapp, email, leadState);
     
-    res.send(`${leadName}, Updated`).status(200);
+    id = id.slice(1);
+   
+    async function resolveUpdateLead(){
+        try{
+            update.updateElements(id, leadName, whatsapp, email, leadState).then(
+                () => {
+                    res.send('Updated').status(200);
+                }
+            ).catch(e => {
+                console.log(e);
+                res.send(`Lead not found : ${e}`).status(401);
+            });    
+        }
+        catch(err){
+            console.log(`internal server error : ${err}`);
+            res.send(`internal server error`).status(500);
+        }
+    }
+    
+    resolveUpdateLead();
 });
 
 router.get('/json/api/lead/list', (req, res) => {
@@ -42,10 +74,11 @@ router.get('/json/api/lead/list', (req, res) => {
                 return ob[key];                                                                                                                                             
             });
 
-            res.send(JSON.stringify(row));
+            res.send(JSON.stringify(row)).status(200);
 
         }catch(e){
             console.log(e);
+            res.send(`Lead not found`).status(404);
         }
     };
     resolveElements();
@@ -76,12 +109,28 @@ router.get('/json/api/lead/list:id', (req, res) => {
     resolveElementsById();
 });
 
-router.post('/json/api/lead/delete:id', (req, res) => {
+router.delete('/json/api/lead/delete:id', (req, res) => {
     var id = req.params.id;   
     id = id.slice(1);
     
-    deleteLead.deleteLead(id);
-    res.send(`Lead id :${id}, Deleted`).status(200);
+    async function resolveDelete(){
+        try{
+            deleteLead.deleteElements(id).then(
+                () => {
+                    res.send('Deleted').status(200);
+                }
+            ).catch(e => {
+                console.log(e);
+                res.send('lead not found').status(401);
+            });    
+        }
+        catch(err){
+            console.log(err);
+            res.status(500);
+        }
+    }
+    
+    resolveDelete();
 });
 
 module.exports = router;
