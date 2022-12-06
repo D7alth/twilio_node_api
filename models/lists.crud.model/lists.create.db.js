@@ -9,7 +9,7 @@ exports.createElements = (segmentationName) => {
                 console.log(`error creating list : ${err}`)
                 return reject(err);
             }
-            console.log("Created segmentation");
+            console.log("Created List");
             return resolve(elements);
             
         })

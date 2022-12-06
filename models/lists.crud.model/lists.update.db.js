@@ -10,7 +10,7 @@ exports.updateElements = (id, listName) => {
                 console.log(`Error to update list ${err}`)
                 return reject(err);
             }
-            console.log("list updated");
+            console.log("List updated");
             return resolve(elements);
             
         })

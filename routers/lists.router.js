@@ -31,7 +31,7 @@ router.post('/json/api/lists/create', (req, res) => {
 
 router.post('/json/api/lists/update:id', (req, res) => {
     var id = req.params.id;
-    let listsName = req.body.segmentName;
+    let listsName = req.body.listName;
 
     id = id.slice(1);
 
