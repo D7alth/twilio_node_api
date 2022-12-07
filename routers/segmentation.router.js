@@ -4,6 +4,8 @@ const update = require('../models/segments.crud.model/segmentation.update.db');
 const listAll = require('../models/segments.crud.model/segmentation.list.all.db');
 const listBy = require('../models/segments.crud.model/segmentation.list.by.id.db');
 const deleteLead = require('../models/segments.crud.model/segmentation.delete.db');
+const relatedLeads =  require('../models/relationship.model/lead.segmentation.list');
+
 
 router.post('/json/api/segment/create', (req, res) => {
 
@@ -99,6 +101,49 @@ router.get('/json/api/segment/list:id', (req, res) => {
         }
     };
     resolveElementsById();
+});
+
+router.get('/json/api/segment/related:id', (req, res) => {
+    var id = req.params.id;
+    id = id.slice(1);
+    var row, ob;
+
+    async function resolveRelatedLeads(){
+        try{
+            ob = await relatedLeads.listJoinLeadsBySegmentation(id);
+            console.log(ob);
+            row = Object.keys(ob).map(function(key){ 
+                return ob[key]
+            });
+            res.send(JSON.stringify(row)).status(200);
+        }catch(e){
+            console.log(e);
+            res.send("not found").status(500);
+        }
+    }
+    resolveRelatedLeads();
+
+
+});
+
+router.get('/json/api/segment/related', (req, res) => {
+    var row, ob;
+
+    async function resolveAll(){
+        try{
+            ob = await relatedLeads.listJoinAll();
+            row = Object.keys(ob).map(function(key){ 
+                return ob[key]
+            });
+            console.log(row);
+            res.send(JSON.stringify(row)).status(200);
+        }catch(e){
+            console.log(e);
+            res.send("not found").status(500);
+        }
+    }
+    resolveAll();
+
 });
 
 router.delete('/json/api/segment/delete:id', (req, res) => {

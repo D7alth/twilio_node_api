@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const createList = require('../models/relationship.model/lead.list.create');
+const createList = require('../models/relationship.model/lead.lists.create');
 const createSegment = require('../models/relationship.model/lead.segments.create'); 
 
 router.post('/json/api/relationship/list/create', (req, res) => {
