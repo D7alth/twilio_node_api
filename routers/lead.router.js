@@ -5,6 +5,7 @@ const listAll = require('../models/leads.crud.model/lead.list.all.db');
 const listBy = require('../models/leads.crud.model/lead.list.by.id.db');
 const deleteLead = require('../models/leads.crud.model/lead.delete.db');
 const segmentsRelated = require('../models/relationship.model/lead.segmentation.list');
+const send = require('../controllers/sender.controller'); 
 
 router.post('/json/api/lead/create', (req, res) => {
 
@@ -157,5 +158,19 @@ router.delete('/json/api/lead/delete:id', (req, res) => {
 
     resolveDelete();
 });
+// capaming
+/*router.post('/json/api/lead/send/', (req, res) => {
+    var message = req.body.message;
+
+    async function resolveSend() {
+        try{    
+
+
+
+        }catch(e){
+
+        }
+    }
+});*/
 
 module.exports = router;

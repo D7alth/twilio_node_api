@@ -104,26 +104,19 @@ router.get('/json/api/segment/list:id', (req, res) => {
 });
 
 router.get('/json/api/segment/related:id', (req, res) => {
-    var id = req.params.id;
+    var ob, id = req.params.id;
     id = id.slice(1);
-    var row, ob;
 
     async function resolveRelatedLeads(){
         try{
             ob = await relatedLeads.listJoinLeadsBySegmentation(id);
-            console.log(ob);
-            row = Object.keys(ob).map(function(key){ 
-                return ob[key]
-            });
-            res.send(JSON.stringify(row)).status(200);
+            res.status(200).send(JSON.stringify(ob));
         }catch(e){
             console.log(e);
             res.send("not found").status(500);
         }
     }
     resolveRelatedLeads();
-
-
 });
 
 router.get('/json/api/segment/related', (req, res) => {

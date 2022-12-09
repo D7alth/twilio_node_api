@@ -2,6 +2,7 @@ const stringConnection = require('./../../config/db.config');
 
 exports.listJoinLeadsBySegmentation = (segmentId) => {
     return new Promise((resolve, reject) => {
+        let result = [], resultOb;
         const sql = `SELECT Leads.leadName, Segmentation.segmentName FROM
         Leads INNER JOIN Segmentation_Leads ON  Leads._id = Segmentation_Leads.lead_id
         INNER JOIN Segmentation ON  Segmentation_Leads.segmentation_id = 
@@ -11,7 +12,8 @@ exports.listJoinLeadsBySegmentation = (segmentId) => {
             if (err) {
                 console.log(`Error in join query : ${err}`);
                 reject(err);
-            } else {
+            }
+            else {     
                 console.log(`select join result : ${elements}`);
                 resolve(elements);
             }
