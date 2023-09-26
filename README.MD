@@ -1,5 +1,6 @@
-# Raul canal API
+# Twillio api
 Service of Backend API with integration with message delivery service [TWILLIO](https://www.twilio.com/pt-br/docs/).
+project cancelled, so I opened it to the public and all the information is fake
 
 - Database config and squeme [config](config)
 - Controllers and contention with TWILLIO API [controllers](controllers)
